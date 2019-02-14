@@ -41,7 +41,7 @@ class Map extends Component {
       <Modal open={this.state.display_gallery} onClose={this.closeHandler} center>
           <Gallery album_id={this.state.album_id} closeHandler={this.closeHandler}/>
       </Modal>
-      <USAMap customize={this.statesCustomConfig()} onClick={this.mapHandler} />
+      <USAMap title="" customize={this.statesCustomConfig()} onClick={this.mapHandler} />
     </div>
     )
   }

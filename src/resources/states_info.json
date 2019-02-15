@@ -1,0 +1,8 @@
+{
+  "visited" : {
+    "AZ": "ARIZONA_ALBUM_ID",
+    "CA": "CALIFORNIA_ALBUM_ID",
+    "MD": "MARYLAND_ALBUM_ID"
+  },
+  "crossed" : ["ID","MI"]
+}

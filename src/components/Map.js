@@ -9,10 +9,13 @@ import GalleryModal from "./GalleryModal";
 
 class Map extends Component {
 
-    state = {
-        album_id : "",
-        display_gallery : false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            album_id : "",
+            display_gallery : false
+        };
+    }
 
     displayGalleryHandler = () => {
         this.setState({display_gallery:false});
@@ -39,7 +42,7 @@ class Map extends Component {
     render() {
         return(
             <>
-                <GalleryModal album_id={this.state.album_id} display_gallery={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
+                <GalleryModal album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
                 <USAMap title="" defaultFill={appconfig.empty_state_color} customize={this.statesCustomConfig()} onClick={this.mapHandler} />
                 <StatesLegend></StatesLegend>
             </>

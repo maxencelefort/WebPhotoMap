@@ -32,10 +32,6 @@ class Gallery extends Component {
         );
     }
 
-    closeModal = () => {
-        this.props.closeHandler();
-    }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.album_id !== this.props.album_id) {
             this.setState({ready: false, pictureItems: []});

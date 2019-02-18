@@ -1,6 +1,6 @@
-import Modal from 'react-bootstrap/Modal';
 import Gallery from './Gallery';
 import React, { Component } from "react";
+import ReactModal from 'react-modal';
 
 class GalleryModal extends Component {
 
@@ -10,18 +10,24 @@ class GalleryModal extends Component {
 
     render(){
         return (
-            <Modal
-                show={this.props.display_gallery}
-                onHide={this.props.closeHandler}
-                dialogClassName="modal-90w"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Gallery album_id={this.props.album_id} closeHandler={this.closeHandler}/>
-                </Modal.Body>
-            </Modal>
+            <ReactModal isOpen={this.props.show} onRequestClose={this.props.closeHandler}
+                        style={{
+                            overlay: {
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                            },
+                            content: {
+                                backgroundColor: 'black',
+                                overflow: 'auto',
+                                textAlign: 'center',
+                                color: 'white'
+                            }
+                        }}>
+                <Gallery album_id={this.props.album_id} />
+            </ReactModal>
         )
     }
 }

@@ -27,7 +27,7 @@ class FlickrService {
 
     static getPictureUrl(picture){
         //{"id":"26301768497","secret":"def7680151","server":"800","farm":1,"title":"Joshua Tree National Park","isprimary":"0","ispublic":1,"isfriend":0,"isfamily":0}
-        return "https://farm"+picture.farm+".staticflickr.com/"+picture.server+"/"+picture.id+"_"+picture.secret+".jpg";
+        return "https://farm"+picture.farm+".staticflickr.com/"+picture.server+"/"+picture.id+"_"+picture.secret+"_b.jpg";
     }
 
     static getGalleryInfo(galleryId){

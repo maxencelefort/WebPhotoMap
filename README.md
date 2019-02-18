@@ -7,10 +7,11 @@ Live demo: https://web-photo-map.herokuapp.com
 
 ### Flickr configuration
 
-Create a file *src/resources/flickr_config.json* and add your Flickr API_KEY as follows:
+Create a file *src/resources/flickr_config.json* and add your Flickr API_KEY and USER_ID as follows:
 
     {
-     "api_key" : "YOUR_API_KEY"
+      "api_key" : "YOUR_API_KEY",
+      "user_id" : "YOUR_USER_ID"
     }
 
 If you don't have a Flickr API key, you can ask one for free here: https://www.flickr.com/services/api/misc.api_keys.html

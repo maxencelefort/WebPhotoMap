@@ -5,6 +5,7 @@ class FlickrService {
     static flickr_api_path = "https://api.flickr.com/services/rest/";
     static ALBUM_REQUEST = "flickr.photosets.getPhotos";
     static ALBUM_INFO_REQUEST = "flickr.photosets.getInfo";
+    static PHOTO_INFO_REQUEST = "flickr.photos.getInfo";
 
 
     static buildFlickrApiUrlGet(request_type, params){
@@ -20,7 +21,7 @@ class FlickrService {
     }
 
     static getGallery(galleryId ){
-        const params = [{name : "photoset_id", value : galleryId},{name : "user_id", value : "132809307%40N04"}];
+        const params = [{name : "photoset_id", value : galleryId},{name : "user_id", value : config.user_id}];
         return axios.get(this.buildFlickrApiUrlGet(this.ALBUM_REQUEST,params));
     }
 
@@ -30,8 +31,13 @@ class FlickrService {
     }
 
     static getGalleryInfo(galleryId){
-        const params = [{name : "photoset_id", value : galleryId},{name : "user_id", value : "132809307%40N04"}];
+        const params = [{name : "photoset_id", value : galleryId},{name : "user_id", value : config.user_id}];
         return axios.get(this.buildFlickrApiUrlGet(this.ALBUM_INFO_REQUEST,params));
+    }
+
+    static getPictureInfo(photoId, secret){
+        const params = [{name : "photo_id", value : photoId},{name : "secret", value : secret}];
+        return axios.get(this.buildFlickrApiUrlGet(this.PHOTO_INFO_REQUEST,params));
     }
 
 }

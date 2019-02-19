@@ -6,6 +6,7 @@ class FlickrService {
     static ALBUM_REQUEST = "flickr.photosets.getPhotos";
     static ALBUM_INFO_REQUEST = "flickr.photosets.getInfo";
     static PHOTO_INFO_REQUEST = "flickr.photos.getInfo";
+    static PHOTO_LOCATION_REQUEST = "flickr.photos.geo.getLocation";
 
 
     static buildFlickrApiUrlGet(request_type, params){
@@ -26,7 +27,6 @@ class FlickrService {
     }
 
     static getPictureUrl(picture){
-        //{"id":"26301768497","secret":"def7680151","server":"800","farm":1,"title":"Joshua Tree National Park","isprimary":"0","ispublic":1,"isfriend":0,"isfamily":0}
         return "https://farm"+picture.farm+".staticflickr.com/"+picture.server+"/"+picture.id+"_"+picture.secret+"_b.jpg";
     }
 
@@ -40,5 +40,9 @@ class FlickrService {
         return axios.get(this.buildFlickrApiUrlGet(this.PHOTO_INFO_REQUEST,params));
     }
 
+    static getPictureLocation(photoId, secret){
+        const params = [{name : "photo_id", value : photoId},{name : "secret", value : secret}];
+        return axios.get(this.buildFlickrApiUrlGet(this.PHOTO_LOCATION_REQUEST,params));
+    }
 }
 export default FlickrService;

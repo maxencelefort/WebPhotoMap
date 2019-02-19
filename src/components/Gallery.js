@@ -71,7 +71,6 @@ class Gallery extends Component {
 
     updateGalleryInfo() {
         FlickrService.getGalleryInfo(this.props.album_id).then(response => {
-            console.log(JSON.stringify(response.data));
             const photoset = response.data.photoset;
             if (photoset != undefined) {
                 this.setState({title: photoset.title._content, description: photoset.description._content});

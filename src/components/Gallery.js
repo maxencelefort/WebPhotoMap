@@ -5,6 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/CarouselItem";
 import PictureCaption from "./PictureCaption";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
+import GalleryModal from "./Map";
 
 class Gallery extends Component {
 
@@ -92,7 +93,7 @@ class Gallery extends Component {
                         <Carousel interval={null} >
                             {this.state.pictureItems.map((item, index) =>
                                 <CarouselItem key={index}>
-                                    <Picture key={index} item={item} />
+                                    <Picture key={index} item={item} width={this.props.width} height={this.props.height} />
                                     <CarouselCaption>
                                         <PictureCaption key={index} item={item} />
                                     </CarouselCaption>

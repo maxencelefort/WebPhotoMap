@@ -11,6 +11,12 @@ path:hover {
     display: none;
 }
 
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+}
+
 .carousel-inner img {
     margin: auto;
 }

@@ -14,6 +14,10 @@ class Picture extends Component {
                 className="d-block h-100"
                 src={FlickrService.getPictureUrl(this.props.item)}
                 alt={this.props.item.title}
+                style={{
+                    maxHeight:this.props.height*0.7,
+                    maxWidth:this.props.width*0.9
+                }}
             />
         );
     }

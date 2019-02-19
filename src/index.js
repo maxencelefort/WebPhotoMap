@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
-library.add(faInfo, faCaretDown, faCaretUp);
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+library.add(faInfoCircle, faCaretDown, faCaretUp);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import FlickrService from "../services/FlickrService";
+import Carousel from 'react-bootstrap/Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -17,15 +18,19 @@ class Picture extends Component {
 
     render() {
         return(
-            <Card className="text-center">
-                <Card.Img variant="top" src={FlickrService.getPictureUrl(this.props.item)} style={{maxHeight:'90%'}} />
-                <Card.Body>
-                    <Card.Title>{this.props.item.title}<span onClick={this.handleInfoButton}>{" "}{this.state.showMore ? <FontAwesomeIcon icon="caret-up" /> : <FontAwesomeIcon icon="caret-down" /> }</span></Card.Title>
-                    <Card className={this.state.showMore ? '' : 'hidden'}>
+            <Carousel.Item className={this.props.index==0 ? "active" : ""}>
+                <img
+                    className="d-block h-100"
+                    src={FlickrService.getPictureUrl(this.props.item)}
+                    alt={this.props.item.title}
+                />
+                <Carousel.Caption>
+                    <h3>{this.props.item.title}<span onClick={this.handleInfoButton}>{" "}{this.state.showMore ? <FontAwesomeIcon icon="caret-up" /> : <FontAwesomeIcon icon="caret-down" /> }</span></h3>
+                    <div className={this.state.showMore ? '' : 'hidden'}>
                         {this.state.moreInfoContent}
-                    </Card>
-                </Card.Body>
-            </Card>
+                    </div>
+                </Carousel.Caption>
+            </Carousel.Item>
         );
     }
 

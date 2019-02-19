@@ -1,6 +1,8 @@
 import Picture from './Picture';
 import React, {Component} from "react";
 import FlickrService from "../services/FlickrService";
+import Carousel from 'react-bootstrap/Carousel';
+import USAMap from "./Map";
 
 class Gallery extends Component {
 
@@ -12,24 +14,6 @@ class Gallery extends Component {
             title: "",
             description: ""
         }
-    }
-
-    render() {
-        return (
-            <div>
-                {this.state.ready ? (
-                    <div>
-                        {this.state.title != "" ?
-                            <h1>{this.state.title}</h1> : ""}
-                        {this.state.description != "" ?
-                            <h2>{this.state.description}</h2> : ""}
-                        {this.state.pictureItems}
-                    </div>
-                ) : (
-                    <h1>Loading...</h1>
-                )}
-            </div>
-        );
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -47,8 +31,8 @@ class Gallery extends Component {
 
     parseList(result) {
         const pictures = [];
-        Promise.all(result.map((item) => {
-            pictures.push(<Picture key={item.id} item={item}/>);
+        Promise.all(result.map((item, index) => {
+            pictures.push(<Picture index={index} key={item.id} item={item}/>);
         })).then(result => {
             this.setState({
                 ready: true,
@@ -83,6 +67,29 @@ class Gallery extends Component {
                 });
             });
     }
+
+    render() {
+        return (
+            <div>
+                {this.state.ready ? (
+                    <div>
+                        {this.state.title != "" ?
+                            <h1>{this.state.title}</h1> : ""}
+                        {this.state.description != "" ?
+                            <h2>{this.state.description}</h2> : ""}
+                        <Carousel interval={null} >
+                            {
+                                this.state.pictureItems
+                            }
+                        </Carousel>
+                    </div>
+                ) : (
+                    <h1>Loading...</h1>
+                )}
+            </div>
+        );
+    }
+
 };
 
 export default Gallery;

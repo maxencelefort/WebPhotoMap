@@ -11,6 +11,14 @@ path:hover {
     display: none;
 }
 
+.carousel-inner img {
+    margin: auto;
+}
+
+.my-legend {
+    margin-left: 5px;
+}
+
 .my-legend .legend-title {
     text-align: left;
     margin-bottom: 5px;

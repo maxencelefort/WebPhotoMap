@@ -43,7 +43,7 @@ class Map extends Component {
     render() {
         return(
             <>
-                <GalleryModal album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
+                <GalleryModal width={this.props.width} height={this.props.height} album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
                 <h1 className="text-center">USA Photo Map</h1>
                 <Card className="text-center">
                     <Card.Body>

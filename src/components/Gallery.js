@@ -2,18 +2,30 @@ import Picture from './Picture';
 import React, {Component} from "react";
 import FlickrService from "../services/FlickrService";
 import Carousel from 'react-bootstrap/Carousel';
-import USAMap from "./Map";
+import CarouselItem from "react-bootstrap/CarouselItem";
+import PictureCaption from "./PictureCaption";
+import CarouselCaption from "react-bootstrap/CarouselCaption";
 
 class Gallery extends Component {
 
     constructor(props) {
         super(props);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
             ready: false,
             pictureItems: [],
             title: "",
-            description: ""
+            description: "",
+            index: 0,
+            direction: null
         }
+    }
+
+    handleSelect(selectedIndex, e) {
+        this.setState({
+            index: selectedIndex,
+            direction: e.direction,
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -31,8 +43,8 @@ class Gallery extends Component {
 
     parseList(result) {
         const pictures = [];
-        Promise.all(result.map((item, index) => {
-            pictures.push(<Picture index={index} key={item.id} item={item}/>);
+        Promise.all(result.map((item) => {
+            pictures.push(item);
         })).then(result => {
             this.setState({
                 ready: true,
@@ -78,9 +90,14 @@ class Gallery extends Component {
                         {this.state.description != "" ?
                             <h2>{this.state.description}</h2> : ""}
                         <Carousel interval={null} >
-                            {
-                                this.state.pictureItems
-                            }
+                            {this.state.pictureItems.map((item, index) =>
+                                <CarouselItem key={index}>
+                                    <Picture key={index} item={item} />
+                                    <CarouselCaption>
+                                        <PictureCaption key={index} item={item} />
+                                    </CarouselCaption>
+                                </CarouselItem>
+                            )}
                         </Carousel>
                     </div>
                 ) : (
@@ -89,7 +106,6 @@ class Gallery extends Component {
             </div>
         );
     }
-
 };
 
 export default Gallery;

@@ -21,12 +21,12 @@ class App extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight * 0.8});
+    this.setState({ width: window.innerWidth, height: window.innerHeight});
   }
 
   render() {
     return (
-        <Map width={this.state.width} height={this.state.height}/>
+        <Map style={{overflowX: 'hidden'}} width={this.state.width} height={this.state.height}/>
     );
   }
 }

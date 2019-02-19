@@ -9,7 +9,6 @@ class PictureCaption extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMore:false,
             info: {},
             moreInfoContent: ""
         }
@@ -18,8 +17,8 @@ class PictureCaption extends Component {
     render() {
         return(
             <>
-                <h3>{this.props.item.title}<span onClick={this.handleInfoButton}>{" "}{this.state.showMore ? <FontAwesomeIcon icon="caret-up" /> : <FontAwesomeIcon icon="caret-down" /> }</span></h3>
-                <div className={this.state.showMore ? '' : 'hidden'}>
+                <h3>{this.props.item.title}<span onClick={this.handleInfoButton}>{" "}{this.props.show ? <FontAwesomeIcon icon="caret-up" /> : <FontAwesomeIcon icon="caret-down" /> }</span></h3>
+                <div className={this.props.show ? '' : 'hidden'}>
                     {this.state.moreInfoContent}
                 </div>
             </>
@@ -27,8 +26,8 @@ class PictureCaption extends Component {
     }
 
     handleInfoButton = () => {
-        if(this.state.showMore){
-            this.setState({showMore:false});
+        if(this.props.show){
+            this.props.handleShowMore();
         } else {
             if(JSON.stringify(this.state.info) == "{}"){
                 FlickrService.getPictureInfo(this.props.item.id,this.props.item.secret).then(result => {
@@ -38,20 +37,20 @@ class PictureCaption extends Component {
                     this.createMoreInfoContent();
                 })
             } else {
-                this.setState({showMore:true});
+                this.props.handleShowMore();
             }
         }
     };
 
     createMoreInfoContent() {
         if(JSON.stringify(this.state.info) != "{}") {
+            this.props.handleShowMore();
             this.setState({
-                showMore:true,
                 moreInfoContent:
                     <Card.Text>
                         <i>{this.state.info.description._content}</i>
-                        <div>Captured {this.state.info.dates.taken}</div>
-                        <div>Tags: {this.createTagsContent()}</div>
+                        <div>Date captured: {this.state.info.dates.taken}</div>
+                        <div>{this.createTagsContent()}</div>
                     </Card.Text>
             });
         }

@@ -3,7 +3,6 @@ import StatesLegend from './StatesLegend';
 import appconfig from '../resources/app_config.json';
 
 import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
 
 import states from '../resources/states_info.json';
 import GalleryModal from "./GalleryModal";
@@ -45,11 +44,7 @@ class Map extends Component {
             <>
                 <GalleryModal width={this.props.width} height={this.props.height} album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
                 <h1 className="text-center">USA Photo Map</h1>
-                <Card className="text-center">
-                    <Card.Body>
-                        <USAMap title="" width={this.props.width} height={this.props.height} defaultFill={appconfig.empty_state_color} customize={this.statesCustomConfig()} onClick={this.mapHandler} />
-                    </Card.Body>
-                </Card>
+                <USAMap title="" width={this.props.width} height={this.props.height*0.7} defaultFill={appconfig.empty_state_color} customize={this.statesCustomConfig()} onClick={this.mapHandler} />
                 <StatesLegend></StatesLegend>
             </>
         )

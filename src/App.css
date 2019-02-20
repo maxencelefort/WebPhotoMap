@@ -11,6 +11,11 @@ path:hover {
     display: none;
 }
 
+.jvectormap-region {
+    stroke: dimgrey;
+    stroke-width: 0.1;
+}
+
 .carousel-caption {
     position: relative;
     left: auto;

@@ -1,14 +1,15 @@
-import states from "../../resources/us_states_info.json";
 import appconfig from "../../resources/app_config.json";
 import USAMap from "react-usa-map";
 
 import React, { Component } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import USStateInfoService from "../../services/USStateInfoService";
 
 
 class UnitedStatesMap extends Component {
     constructor(props) {
         super(props);
+        this.usStateInfoService = new USStateInfoService();
         this.state = {
             album_id : "",
             display_gallery : false
@@ -16,19 +17,17 @@ class UnitedStatesMap extends Component {
     }
 
     mapHandler = (event) => {
-        if(Object.keys(states.visited).indexOf(event.target.dataset.name) > -1) {
-            this.props.handleClick(states.visited[event.target.dataset.name]);
-            //setState({display_gallery : true,album_id:})
+        if(this.usStateInfoService.isVisited(event.target.dataset.name)) {
+            this.props.handleClick(this.usStateInfoService.getAlbum(event.target.dataset.name));
         }
     };
 
     statesCustomConfig = () => {
         let config = [];
-        let visitedStates = Object.keys(states.visited);
-        for(let visitedState of visitedStates){
+        for(let visitedState of this.usStateInfoService.getVisited()){
             config[visitedState] =  {fill : appconfig.visited_color};
         }
-        for(let crossedState of states.crossed){
+        for(let crossedState of this.usStateInfoService.getCrossed()){
             config[crossedState] = {fill : appconfig.crossed_color};
         }
         return config;

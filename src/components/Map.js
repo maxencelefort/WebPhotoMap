@@ -10,6 +10,7 @@ class Map extends Component {
 
     constructor(props) {
         super(props);
+        this.countryInfoService = new CountryInfoService();
         this.state = {
             selected_country : "",
             album_id : "",
@@ -21,13 +22,19 @@ class Map extends Component {
         this.setState({
             selected_country:countryCode
         });
-        if(CountryInfoService.isVisited(countryCode)) {
-            this.showGallery(CountryInfoService.getAlbum(countryCode));
+        if(this.countryInfoService.isVisited(countryCode)) {
+            this.showGallery(this.countryInfoService.getAlbum(countryCode));
         }
     }
 
+    errorHandler = (error) => {
+        this.displayGalleryHandler();
+        //TODO display error banner
+    }
+
     showGallery = (album_id) => {
-        if(album_id != "") {
+        console.log("Show gallery "+album_id)
+        if(album_id != "" && album_id != undefined) {
             this.setState({
                 album_id: album_id,
                 display_gallery: true
@@ -48,7 +55,7 @@ class Map extends Component {
             <div className="text-center" style={{width: this.props.width * 0.9, height: this.props.height * 0.9}}>
                 <GalleryModal width={this.props.width} height={this.props.height} album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
                 {
-                    this.state.selected_country == "US" && CountryInfoService.isVisited("US") && CountryInfoService.getAlbum("US") == "" ?
+                    this.state.selected_country == "US" && this.countryInfoService.isVisited("US") && this.countryInfoService.getAlbum("US") == "" ?
                         <UnitedStatesMap handleClick={this.showGallery} handleBack={this.handleBackUsMapClick} width={this.props.width}
                                          height={this.props.height}/>
                         :

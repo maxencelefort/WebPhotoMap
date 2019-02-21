@@ -58,6 +58,7 @@ class Gallery extends Component {
             this.parseList(response.data.photoset.photo);
         })
             .catch(error => {
+                this.props.errorHandler(error);
                 this.setState({
                     isLoaded: true,
                     error

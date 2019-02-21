@@ -26,7 +26,7 @@ class GalleryModal extends Component {
                                 color: 'white'
                             }
                         }}>
-                <Gallery album_id={this.props.album_id} width={this.props.width} height={this.props.height} />
+                <Gallery album_id={this.props.album_id} width={this.props.width} height={this.props.height} errorHandler={this.props.errorHandler}/>
             </ReactModal>
         )
     }

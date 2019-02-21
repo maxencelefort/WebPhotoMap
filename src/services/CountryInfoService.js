@@ -1,24 +1,12 @@
 import countries from "../resources/countries_info.json";
+import RegionInfoService from "./RegionInfoService";
 
-class CountryInfoService {
+class CountryInfoService extends RegionInfoService{
 
-    static getVisitedCountries(){
-        return Object.keys(countries.visited);
+    constructor(){
+        super(countries);
     }
 
-    static getCrossedCountries(){
-        return countries.crossed;
-    }
-
-    static isVisited(countryCode) {
-        return this.getVisitedCountries().indexOf(countryCode) > 1;
-    }
-
-    static getAlbum(countryCode){
-        if(this.isVisited(countryCode) > 1){
-            return countries.visited[countryCode];
-        } else return "";
-    }
 }
 
 export default CountryInfoService;

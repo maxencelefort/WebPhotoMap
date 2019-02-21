@@ -1,5 +1,5 @@
 # WebPhotoMap
-Webapp to add photos as pins to a World map. 
+Webapp to add photos as pins to a World map. Based on [react-jvectormap](https://github.com/kadoshms/react-jvectormap).
 
 Live demo: https://web-photo-map.herokuapp.com
 
@@ -22,15 +22,40 @@ To display your own Flickr album from each region, you must create a file */reso
 - a "visited" value that contains a key/value pair for each region, with the country code as the key and the flickr album id as value,
 - a "crossed" array that contains the list of country codes (those that you visited but don't have a gallery to display for).
 
-This file content should look like this (with an entry for each state you want to diplay a gallery for or mark as crossed):
+This file content should look like this (with an entry for each region you want to diplay a gallery for or mark as crossed):
 
     {
-      "visited" : {
-        "FR": "FRANCE_ALBUM_ID",
-        "CA": "CANADA_ALBUM_ID",
-        "US": "[OPTIONAL_US_ALBUM_ID]"
-      },
-      "crossed" : ["TR","IT"]
+      "title" : "Main map",
+      "vectorMap" : "[MAP]",
+      "submap" : false,
+      "regions": {
+        "visited": {
+          "REGION_CODE": "ALBUM_ID",
+          "REGION_CODE": "ALBUM_ID",
+          "REGION_CODE": "ALBUM_ID",
+          "REGION_CODE": {
+            "title": "Sub Map",
+            "vectorMap": "[MAP]",
+            "submap": true,
+            "regions": {
+              "prefix": "[PREFIX - OPTIONAL]",
+              "visited": {
+                "REGION_CODE": "ALBUM_ID",
+                "REGION_CODE": "ALBUM_ID"
+              },
+              "crossed": [
+                "REGION_CODE",
+                "REGION_CODE",
+                "REGION_CODE"
+              ]
+            }
+          }
+        },
+        "crossed": [
+          "REGION_CODE",
+          "REGION_CODE"
+        ]
+      }
     }
 
 
@@ -38,35 +63,62 @@ To find the album id, just open your album on Flickr and get the id that is at t
 
 www.flickr.com/photos/your_username/albums/`ALBUM_ID`
 
+At this time, here is the list of vectorMaps that are supported by [react-jvectormap](https://github.com/kadoshms/react-jvectormap) (check this link for updates to the list or to ask for a new map)
+
+* world_mill
+* us_aea
+* europe_mill
+* continents_mill
+* ch_mill
+* oceania_mill
+* africa_mill
+* asia_mill
+* north_america_mill
+* south_america_mill
+* ca_lcc
+* brazil
+
 #### Sub Maps
 
-If you have visited many parts of a specific country, you can display a sub-map for this specific country. For now, it only works for the USA, but the idea is to make it available for any country in the futur. 
-
-To display a sub map for a specific country, simply remove the album id in your */resources/countries_info.json* file and leave an empty string, for example if you want to display an USA sub map:
-
-    {
-          "visited" : {
-            "FR": "FRANCE_ALBUM_ID",
-            "CA": "CANADA_ALBUM_ID",
-            "US": ""
-          },
-          "crossed" : ["TR","IT"]
-    }
-
-Then you need to configure this specific sub map. Note that this procedure is going to evolve when multiple sub maps will be implemented.
-
-Create a */resources/us_states_info.json* file and populate it with the states visited/crossed, the format is the same as for the country configuration file:
+If you have visited many parts of a specific country, you can display a sub-map for this specific country. 
+To display a sub map for a specific country, simply replace the album id in your */resources/regions_info.json* file and put another regions object (see previous example), for example if you want a World map and an USA sub map:
 
     {
-        "visited" : {
-            "AZ": "ARIZONA_ALBUM_ID",
-            "CA": "CALIFORNIA_ALBUM_ID",
-            "MD": "MARYLAND_ALBUM_ID"
+      "title" : "World Photo Map",
+      "vectorMap" : "world_mill",
+      "submap" : false,
+      "regions": {
+        "visited": {
+          "CA": "CANADA_ALBUM_ID",
+          "FR": "FRANCE_ALBUM_ID",
+          "US": {
+            "title": "United States Photo Map",
+            "vectorMap": "us_aea",
+            "submap": true,
+            "regions": {
+              "prefix": "US-",
+              "visited": {
+                "CO": "COLORADO_ALBUM_ID",
+                "MD": "MARYLAND_ALBUM_ID",
+                "UT": "UTAH_ALBUM_ID"
+              },
+              "crossed": [
+                "DC",
+                "WY"
+              ]
+            }
+          }
         },
-        "crossed" : ["ID","MI"]
+        "crossed": [
+          "TR",
+          "IT"
+        ]
+      }
     }
-    
+
 That's it! When you click the USA region, a sub map will appear instead of a gallery!
+
+Note: the "prefix" attribute is used to match the region code in your JSON with the one returned from the map data. For example the "us_aea" map adds the "US-" prefix before States code ("UT" becomes "US-UT"). You could also remove the prefix attribute and edit your *regions-info.json* file to add the prefix to each state.
 
 ## Run the app
 
@@ -80,11 +132,10 @@ You can also easily deploy to Heroku by hosting the app on a github repository a
 
 ## Optional configuration
 
-### State colors
+### Region colors
 
 You can edit the file *src/resources/app_config.json* and change the colors to your taste.
 
 ## Next development steps
 
-- Add more country possibilities for the sub map
 - Integrate map into Wordpress

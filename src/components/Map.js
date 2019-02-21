@@ -1,72 +1,68 @@
-import appconfig from '../resources/app_config.json';
+import appconfig from "../resources/app_config";
+import {VectorMap} from "react-jvectormap";
 import React, { Component } from "react";
+import RegionInfoService from "../services/RegionInfoService";
 
-import MapLegend from "./MapLegend";
-import UnitedStatesMap from "./maps/UnitedStatesMap";
-import WorldMap from "./maps/WorldMap";
-import GalleryModal from "./GalleryModal";
-import CountryInfoService from "../services/CountryInfoService";
-class Map extends Component {
+export class Map extends Component {
 
     constructor(props) {
         super(props);
-        this.countryInfoService = new CountryInfoService();
+        this.regionInfoService = new RegionInfoService(props.mapInfo.regions);
         this.state = {
-            selected_country : "",
-            album_id : "",
-            display_gallery : false,
+            mapData : {}
         };
     }
 
-    handleCountryClick = (countryCode) => {
-        this.setState({
-            selected_country:countryCode
-        });
-        if(this.countryInfoService.isVisited(countryCode)) {
-            this.showGallery(this.countryInfoService.getAlbum(countryCode));
+    componentWillMount() {
+        this.initializeMapData();
+    }
+
+    initializeMapData() {
+        let data = {};
+        for(let country of this.regionInfoService.getVisited()){
+            data[country] = 1
         }
-    }
-
-    errorHandler = (error) => {
-        this.displayGalleryHandler();
-        //TODO display error banner
-    }
-
-    showGallery = (album_id) => {
-        console.log("Show gallery "+album_id)
-        if(album_id != "" && album_id != undefined) {
-            this.setState({
-                album_id: album_id,
-                display_gallery: true
-            });
+        for(let country of this.regionInfoService.getCrossed()){
+            data[country] = 0
         }
+        this.setState({mapData: data});
     }
 
-    handleBackUsMapClick = () => {
-        this.setState({selected_country:""});
+    handleRegionClick = (event,data) => {
+        this.refs.map.$mapObject.tip.hide();
+        this.props.handleClick(this.regionInfoService.getRegionContent(data));
     }
 
-    displayGalleryHandler = () => {
-        this.setState({display_gallery:false});
-    };
 
-    render() {
-        return(
-            <div className="text-center" style={{width: this.props.width * 0.9, height: this.props.height * 0.9}}>
-                <GalleryModal width={this.props.width} height={this.props.height} album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.displayGalleryHandler} />
-                {
-                    this.state.selected_country == "US" && this.countryInfoService.isVisited("US") && this.countryInfoService.getAlbum("US") == "" ?
-                        <UnitedStatesMap handleClick={this.showGallery} handleBack={this.handleBackUsMapClick} width={this.props.width}
-                                         height={this.props.height}/>
-                        :
-                        <WorldMap handleClick={this.handleCountryClick} width={this.props.width}
-                                  height={this.props.height}/>
-                }
-                <MapLegend></MapLegend>
-            </div>
-        )
+    render () {
+        return (
+            <VectorMap
+                map={this.props.mapInfo.vectorMap}
+                backgroundColor="transparent"
+                ref={"map"}
+                hoverOpacity="0.7"
+                zoomOnScroll = "false"
+                containerStyle={{
+                    width: '100%',
+                    height: '80%'
+                }}
+                regionStyle={{
+                    initial: {
+                        fill: appconfig.empty_color
+                    }
+                }}
+                onRegionClick={this.handleRegionClick}
+                containerClassName="map"
+                series={{
+                    regions: [
+                        {
+                            values: this.state.mapData,  //this is your data
+                            scale: [appconfig.crossed_color, appconfig.visited_color],  //your color game's here
+                            normalizeFunction: "polynomial"
+                        }
+                    ]
+                }}
+            />
+        );
     }
-
-};
-
-export default Map;
+}

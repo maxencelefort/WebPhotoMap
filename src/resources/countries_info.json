@@ -1,8 +1,0 @@
-{
-  "visited" : {
-    "FR": "FRANCE_ALBUM_ID",
-    "CA": "CANADA_ALBUM_ID",
-    "US": "[OPTIONAL_ALBUM_ID]"
-  },
-  "crossed" : ["TR","IT"]
-}

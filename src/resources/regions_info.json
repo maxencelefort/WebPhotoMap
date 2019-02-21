@@ -1,0 +1,33 @@
+{
+  "title" : "Main map",
+  "vectorMap" : "[MAP]",
+  "submap" : false,
+  "regions": {
+    "visited": {
+      "REGION_CODE": "ALBUM_ID",
+      "REGION_CODE": "ALBUM_ID",
+      "REGION_CODE": "ALBUM_ID",
+      "REGION_CODE": {
+        "title": "Sub Map",
+        "vectorMap": "[MAP]",
+        "submap": true,
+        "regions": {
+          "prefix": "[PREFIX - OPTIONAL]",
+          "visited": {
+            "REGION_CODE": "ALBUM_ID",
+            "REGION_CODE": "ALBUM_ID"
+          },
+          "crossed": [
+            "REGION_CODE",
+            "REGION_CODE",
+            "REGION_CODE"
+          ]
+        }
+      }
+    },
+    "crossed": [
+      "REGION_CODE",
+      "REGION_CODE"
+    ]
+  }
+}

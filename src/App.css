@@ -16,6 +16,10 @@ path:hover {
     stroke-width: 0.1;
 }
 
+ul.legend-labels {
+    text-align: left;
+}
+
 .carousel-caption {
     position: relative;
     left: auto;

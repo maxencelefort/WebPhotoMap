@@ -1,6 +1,5 @@
 import appconfig from '../../resources/app_config.json';
 import React, { Component } from "react";
-import ReactDOM from 'react-dom';
 import CountryInfoService from "../../services/CountryInfoService";
 
 import { VectorMap } from "react-jvectormap";

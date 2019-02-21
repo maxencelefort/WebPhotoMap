@@ -1,6 +1,6 @@
 {
   "name": "web-photo-map",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",

@@ -29,7 +29,7 @@ class PictureCaption extends Component {
         if(this.props.show){
             this.props.handleShowMore();
         } else {
-            if(JSON.stringify(this.state.info) == "{}"){
+            if(JSON.stringify(this.state.info) === "{}"){
                 FlickrService.getPictureInfo(this.props.item.id,this.props.item.secret).then(result => {
                     this.setState({
                         info:result.data.photo
@@ -43,7 +43,7 @@ class PictureCaption extends Component {
     };
 
     createMoreInfoContent() {
-        if(JSON.stringify(this.state.info) != "{}") {
+        if(JSON.stringify(this.state.info) !== "{}") {
             this.props.handleShowMore();
             this.setState({
                 moreInfoContent:

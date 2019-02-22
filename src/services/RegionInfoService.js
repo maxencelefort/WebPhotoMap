@@ -13,7 +13,7 @@ class RegionInfoService {
     }
 
     addRegionPrefix(regions){
-        if(this.regions.prefix != undefined){
+        if(this.regions.prefix !== undefined){
             const prefix = this.regions.prefix;
             let visitedRegions = regions.map(function(region) {
                 return prefix+region;
@@ -34,7 +34,7 @@ class RegionInfoService {
     }
 
     removePrefix(regionCode) {
-        if(this.regions.prefix != undefined){
+        if(this.regions.prefix !== undefined){
             return regionCode.replace(this.regions.prefix,'');
         }
         return regionCode;

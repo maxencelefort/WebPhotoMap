@@ -4,8 +4,6 @@ import FlickrService from "../services/FlickrService";
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/CarouselItem";
 
-import GalleryModal from "./Map";
-
 class Gallery extends Component {
 
     constructor(props) {
@@ -45,7 +43,7 @@ class Gallery extends Component {
         const pictures = [];
         Promise.all(result.map((item) => {
             pictures.push(item);
-        })).then(result => {
+        })).then( () => {
             this.setState({
                 ready: true,
                 pictureItems: pictures
@@ -69,7 +67,7 @@ class Gallery extends Component {
     updateGalleryInfo() {
         FlickrService.getGalleryInfo(this.props.album_id).then(response => {
             const photoset = response.data.photoset;
-            if (photoset != undefined) {
+            if (photoset !== undefined) {
                 this.setState({title: photoset.title._content, description: photoset.description._content});
             }
         })
@@ -86,9 +84,9 @@ class Gallery extends Component {
             <div>
                 {this.state.ready ? (
                     <div>
-                        {this.state.title != "" ?
+                        {this.state.title !== "" ?
                             <h1>{this.state.title}</h1> : ""}
-                        {this.state.description != "" ?
+                        {this.state.description !== "" ?
                             <h2>{this.state.description}</h2> : ""}
                         <Carousel interval={null} >
                             {this.state.pictureItems.map((item, index) =>

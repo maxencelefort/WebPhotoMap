@@ -32,7 +32,7 @@ class WebPhotoMap extends Component {
     }
 
     showGallery = (album_id) => {
-        if(album_id != "" && album_id != undefined) {
+        if(album_id !== "" && album_id !== undefined) {
             this.setState({
                 album_id: album_id,
                 display_gallery: true,
@@ -57,7 +57,7 @@ class WebPhotoMap extends Component {
                 <div>
                     <h1 className="text-center">{this.state.mapInfo.title}</h1>
                     { this.state.mapInfo.submap ?
-                        <span onClick={this.handleMapBack} style={{cursor:"pointer"}}><FontAwesomeIcon icon="chevron-left" /> Back to {previousMapInfo != undefined && previousMapInfo.title != "" ? previousMapInfo.title : "previous map"}</span>
+                        <span onClick={this.handleMapBack} style={{cursor:"pointer"}}><FontAwesomeIcon icon="chevron-left" /> Back to {previousMapInfo !== undefined && previousMapInfo.title !== "" ? previousMapInfo.title : "previous map"}</span>
                         :
                         <span></span>
                     }

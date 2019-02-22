@@ -24,7 +24,11 @@ class GalleryModal extends Component {
                                 backgroundColor: 'black',
                                 overflow: 'auto',
                                 textAlign: 'center',
-                                color: 'white'
+                                color: 'white',
+                                top : '5px',
+                                left : '5px',
+                                right : '5px',
+                                bottom : '5px',
                             }
                         }}>
                 <div onClick={this.props.closeHandler} className={"windowCloseButton"}><FontAwesomeIcon icon="window-close" /></div>

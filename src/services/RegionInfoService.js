@@ -29,7 +29,6 @@ class RegionInfoService {
 
     getRegionContent(regionCode){
         if(this.isVisited(regionCode)){
-            console.log("access region content ",this.removePrefix(regionCode)," from ",this.regions.visited);
             return this.regions.visited[this.removePrefix(regionCode)];
         } else return "";
     }

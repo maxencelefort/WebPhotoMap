@@ -13,7 +13,6 @@ class Picture extends Component {
     }
 
     handleClick  = () => {
-        console.log("switch! "+this.state.showMore);
         this.setState({showMore: this.state.showMore ? false : true});
     };
 

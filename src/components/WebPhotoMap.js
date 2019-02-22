@@ -20,7 +20,6 @@ class WebPhotoMap extends Component {
     }
 
     handleRegionClick = (selectedValue) => {
-        console.log("Region clicked: ",selectedValue)
         if(typeof selectedValue === 'string' || selectedValue instanceof String){
             this.showGallery(selectedValue);
         } else {
@@ -78,7 +77,6 @@ class WebPhotoMap extends Component {
                 map: map
             }
         )
-        this.forceUpdate();
     }
 };
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import regionsInfo from '../resources/regions_info';
 import MapLegend from "./MapLegend";
 import { Map } from "./Map";
 import GalleryModal from "./GalleryModal";
@@ -9,21 +8,21 @@ class WebPhotoMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mapInfo : regionsInfo,
+            mapInfo : this.props.regions,
             selected_value : "",
             display_gallery : false,
         };
     }
 
     componentWillMount() {
-        this.generateMap(regionsInfo);
+        this.generateMap(this.state.mapInfo,false);
     }
 
     handleRegionClick = (selectedValue) => {
         if(typeof selectedValue === 'string' || selectedValue instanceof String){
             this.showGallery(selectedValue);
         } else {
-            this.generateMap(selectedValue);
+            this.generateMap(selectedValue,true);
         }
     }
 
@@ -42,7 +41,7 @@ class WebPhotoMap extends Component {
     }
 
     handleMapBack = () => {
-        this.generateMap(regionsInfo);
+        this.generateMap(this.state.previousMapInfo, false);
     }
 
     handleGalleryBack = () => {
@@ -51,17 +50,17 @@ class WebPhotoMap extends Component {
 
     render() {
         return(
-            <div className="text-center" style={{width: this.props.width, height: this.props.height}}>
+            <div className="text-center" style={{width: this.props.width*0.99, height: this.props.height}}>
                 <GalleryModal width={this.props.width} height={this.props.height} album_id={this.state.album_id} show={this.state.display_gallery} closeHandler={this.handleGalleryBack} errorHandler={this.errorHandler} />
                 <div>
                     <h1 className="text-center">{this.state.mapInfo.title}</h1>
                     { this.state.mapInfo.submap ?
-                        <span onClick={this.handleMapBack} style={{cursor:"pointer"}}><FontAwesomeIcon icon="chevron-left" /> Back to previous map</span>
+                        <span onClick={this.handleMapBack} style={{cursor:"pointer"}}><FontAwesomeIcon icon="chevron-left" /> Back to {this.state.previousMapInfo != undefined && this.state.previousMapInfo.title != "" ? this.state.previousMapInfo.title : "previous map"}</span>
                         :
                         <span></span>
                     }
-                    <div style={{width:this.props.width,height:this.props.height}}>
-                        {this.state.map}
+                    <div style={{width:this.props.width,height:this.props.height*0.75}}>
+                        <Map key={this.state.mapInfo.vectorMap} mapInfo={this.state.mapInfo} width={this.props.width} height={this.props.height} handleClick={this.handleRegionClick} handleBack={this.handleMapBack} />
                     </div>
                 </div>
                 <MapLegend></MapLegend>
@@ -69,12 +68,15 @@ class WebPhotoMap extends Component {
         )
     }
 
-    generateMap(regionInfo) {
-        let map = <Map key={regionInfo.vectorMap} mapInfo={regionInfo} width={this.props.width} height={this.props.height} handleClick={this.handleRegionClick} handleBack={this.handleMapBack} parentMapTitle={regionInfo.title}/>;
+    generateMap(regionInfo,setPrevious) {
+        if(setPrevious){
+            this.setState({
+                previousMapInfo: this.state.mapInfo
+            });
+        }
         this.setState(
             {
                 mapInfo: regionInfo,
-                map: map
             }
         )
     }

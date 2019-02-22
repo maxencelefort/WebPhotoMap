@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import WebPhotoMap from './components/WebPhotoMap';
+import regionsInfo from './resources/regions_info';
 
 class App extends Component {
 
@@ -26,7 +27,7 @@ class App extends Component {
 
   render() {
     return (
-        <WebPhotoMap style={{overflowX: 'hidden'}} width={this.state.width} height={this.state.height}/>
+        <WebPhotoMap style={{overflowX: 'hidden'}} width={this.state.width} height={this.state.height} regions={regionsInfo}/>
     );
   }
 }

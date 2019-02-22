@@ -1,6 +1,5 @@
 {
   "name": "web-photo-map",
-  "homepage": "https://github.com/maxencelefort/WebPhotoMap",
   "description": "Webapp to display photos galleries on map regions",
   "keywords": [
     "flickr",

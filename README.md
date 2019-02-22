@@ -130,6 +130,16 @@ To run the app locally, **after you added required files**, you need to have nod
 
 You can also easily deploy to Heroku by hosting the app on a github repository and linking this repository on the Heroku interface, then simply deploy and you're good to go!
 
+## Integrate into your website
+
+Once it's hosted (on heroku for example) you can easily integrate the map to your website using and *iframe*  :
+    
+    <iframe src="[LINK_TO_YOUR_MAP]" frameborder="0" scrolling="no"></iframe> 
+
+This is the iframe tag I used to integrate into my personal Wordpress blog:
+
+    <iframe style="width: 100%; min-height: 600px !important;" src="https://web-photo-map.herokuapp.com" frameborder="0" scrolling="no"></iframe>
+
 ## Optional configuration
 
 ### Region colors
@@ -138,4 +148,4 @@ You can edit the file *src/resources/app_config.json* and change the colors to y
 
 ## Next development steps
 
-- Integrate map into Wordpress
+- Add unit testing

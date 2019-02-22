@@ -16,6 +16,10 @@ path:hover {
     stroke-width: 0.1;
 }
 
+.windowCloseButton {
+    float: left;
+}
+
 ul.legend-labels {
     text-align: left;
 }

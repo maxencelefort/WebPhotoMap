@@ -8,7 +8,8 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-library.add(faInfoCircle, faCaretDown, faCaretUp, faChevronLeft);
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+library.add(faInfoCircle, faCaretDown, faCaretUp, faChevronLeft, faWindowClose);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

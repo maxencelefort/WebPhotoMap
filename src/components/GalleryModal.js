@@ -1,6 +1,7 @@
 import Gallery from './Gallery';
 import React, { Component } from "react";
 import ReactModal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class GalleryModal extends Component {
 
@@ -26,6 +27,7 @@ class GalleryModal extends Component {
                                 color: 'white'
                             }
                         }}>
+                <FontAwesomeIcon onClick={this.props.closeHandler} className={"windowCloseButton"} icon="window-close" />
                 <Gallery album_id={this.props.album_id} width={this.props.width} height={this.props.height} errorHandler={this.props.errorHandler}/>
             </ReactModal>
         )

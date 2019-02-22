@@ -1,5 +1,5 @@
 # WebPhotoMap
-Webapp to add photos as pins to a World map. Based on [react-jvectormap](https://github.com/kadoshms/react-jvectormap).
+Webapp to display photos galleries on map regions. Based on [react-jvectormap](https://github.com/kadoshms/react-jvectormap).
 
 Live demo: https://web-photo-map.herokuapp.com
 

@@ -27,7 +27,7 @@ class GalleryModal extends Component {
                                 color: 'white'
                             }
                         }}>
-                <FontAwesomeIcon onClick={this.props.closeHandler} className={"windowCloseButton"} icon="window-close" />
+                <div onClick={this.props.closeHandler} className={"windowCloseButton"}><FontAwesomeIcon icon="window-close" /></div>
                 <Gallery album_id={this.props.album_id} width={this.props.width} height={this.props.height} errorHandler={this.props.errorHandler}/>
             </ReactModal>
         )

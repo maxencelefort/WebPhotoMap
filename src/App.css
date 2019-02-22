@@ -18,6 +18,7 @@ path:hover {
 
 .windowCloseButton {
     float: left;
+    cursor: pointer;
 }
 
 ul.legend-labels {

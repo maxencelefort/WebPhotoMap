@@ -13,7 +13,7 @@ class Picture extends Component {
     }
 
     handleClick  = () => {
-        this.setState({showMore: this.state.showMore ? false : true});
+        this.setState(this.setState({ showMore: !this.state.showMore }));
     };
 
     render() {
